@@ -1,1 +1,1 @@
-# MERN-SMA
+# MERN-Social-Media-Application
