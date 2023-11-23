@@ -5,7 +5,7 @@ import axios from "axios";
 export const updateUserData = async function (name, email, userName, about) {
   try {
     const base_url = window.location.origin;
-
+    console.log(base_url);
     console.log(name, email, userName, about);
     const res = await axios({
       method: "PATCH",

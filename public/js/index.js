@@ -72,7 +72,7 @@ document
     createPost(name, description, category);
   });
 
-document.querySelector(".signup-form-div").addEventListener("submit", (e) => {
+document?.querySelector(".signup-form-div")?.addEventListener("submit", (e) => {
   e.preventDefault();
 
   let name = document.getElementById("name").value;

@@ -5427,9 +5427,10 @@ var hideAlert = exports.hideAlert = function hideAlert() {
 };
 var showAlert = exports.showAlert = function showAlert(type, message) {
   hideAlert();
-  var markup = "<div class='alert alert--".concat(type, "'>").concat(message, "</div>");
-  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
-  window.setTimeout(hideAlert, 3000);
+  var markup = "\n  <div class=\"alert-div\">\n    <div class='alert alert--".concat(type, "'>").concat(message, "</div>\n  </div>");
+  document.querySelector(".form-div-first").insertAdjacentHTML("beforeend", markup);
+
+  // window.setTimeout(hideAlert, 3000);
 };
 },{}],"auth.js":[function(require,module,exports) {
 "use strict";
@@ -5556,17 +5557,14 @@ var signup = exports.signup = /*#__PURE__*/function () {
               location.assign("/");
             }, 3000);
           }
-          _context2.next = 13;
+          _context2.next = 12;
           break;
         case 8:
           _context2.prev = 8;
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
           (0, _alerts.showAlert)("error", _context2.t0.response.data.message || "Something Went Wrong! Try Again");
-          window.setTimeout(function () {
-            location.reload(true);
-          }, 5000);
-        case 13:
+        case 12:
         case "end":
           return _context2.stop();
       }
@@ -5602,16 +5600,18 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var updateUserData = exports.updateUserData = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(name, email, userName, about) {
-    var res;
+    var base_url, res;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
+          base_url = window.location.origin;
+          console.log(base_url);
           console.log(name, email, userName, about);
-          _context.next = 4;
+          _context.next = 6;
           return (0, _axios.default)({
             method: "PATCH",
-            url: "".concat(_config.user_url, "/updateMe"),
+            url: "".concat(base_url, "/api/users/updateMe"),
             data: {
               name: name,
               email: email,
@@ -5619,7 +5619,7 @@ var updateUserData = exports.updateUserData = /*#__PURE__*/function () {
               about: about
             }
           });
-        case 4:
+        case 6:
           res = _context.sent;
           if (res.data.status == "success") {
             (0, _alerts.showAlert)("success", "Data Updated Successfully");
@@ -5628,18 +5628,18 @@ var updateUserData = exports.updateUserData = /*#__PURE__*/function () {
             });
             document.querySelector(".profile-submit-btn").style.display = "none";
           }
-          _context.next = 12;
+          _context.next = 14;
           break;
-        case 8:
-          _context.prev = 8;
+        case 10:
+          _context.prev = 10;
           _context.t0 = _context["catch"](0);
           console.log("came err");
           (0, _alerts.showAlert)("error", _context.t0.response.data.message);
-        case 12:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[0, 10]]);
   }));
   return function updateUserData(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
@@ -5709,7 +5709,7 @@ var _auth = require("./auth");
 var _updateUserData = require("./updateUserData");
 var _createPost = require("./createPost");
 var _alerts = require("./alerts");
-var _document, _document2, _document3, _document4, _document$querySelect, _document5; // import { latesPosts } from "./latestPosts";
+var _document, _document2, _document3, _document4, _document$querySelect, _document5, _document6; // import { latesPosts } from "./latestPosts";
 console.log("Starting index.js....");
 
 // Login
@@ -5761,7 +5761,7 @@ if (document.querySelector(".profile-submit-btn")) {
   }
   (0, _createPost.createPost)(name, description, category);
 });
-document.querySelector(".signup-form-div").addEventListener("submit", function (e) {
+(_document6 = document) === null || _document6 === void 0 || (_document6 = _document6.querySelector(".signup-form-div")) === null || _document6 === void 0 ? void 0 : _document6.addEventListener("submit", function (e) {
   e.preventDefault();
   var name = document.getElementById("name").value;
   var email = document.getElementById("email").value;

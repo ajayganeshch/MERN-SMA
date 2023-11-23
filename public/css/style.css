@@ -66,6 +66,10 @@ body {
   color: rgb(32, 16, 255);
 }
 
+.signup-btn-home {
+  text-decoration-color: none;
+}
+
 .auth-div {
   display: flex;
   gap: 15px;
@@ -332,6 +336,7 @@ body {
 }
 
 .signup-form-div {
+  position: relative;
   padding: 10px;
   background-color: whitesmoke;
   margin-bottom: 40px;
@@ -360,29 +365,28 @@ body {
   background-color: #51ff00;
 }
 
-/* Jonas */
+.alert-div {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .alert {
-  width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
   height: 50px;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  z-index: 9999;
   color: #fff;
   font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
   padding: 1.6rem 15rem;
-  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
-  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-shadow: 0 -2rem 4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -2rem 4rem rgba(0, 0, 0, 0.25);
 }
+
 .alert--success {
   background-color: #20bf6b !important;
 }

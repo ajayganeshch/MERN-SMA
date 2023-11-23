@@ -80,8 +80,5 @@ export const signup = async function (
       "error",
       err.response.data.message || "Something Went Wrong! Try Again"
     );
-    window.setTimeout(() => {
-      location.reload(true);
-    }, 5000);
   }
 };
