@@ -9,7 +9,9 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldsDB = (err) => {
-  const message = `Duplicate field value: '${err.keyValue.name}'.This already taken.`;
+  let value = Object.keys(err.keyValue);
+  value = value[0];
+  const message = `Duplicate field value: '${value}'.This value has been already taken. This Field must be unique`;
 
   return new AppError(message, 400);
 };
@@ -87,7 +89,7 @@ module.exports = (err, req, res, next) => {
     sendErrorDev(err, req, res);
   } else if (process.env.NODE_ENV == "production") {
     let error = JSON.parse(JSON.stringify(err));
-    error.message = err.message;
+
     if (err.name == "CastError") error = handleCastErrorDB(error);
     // if (err.name == "CastError") error = handleCastErrorDB(error);
     if (err.code == 11000) error = handleDuplicateFieldsDB(error);
