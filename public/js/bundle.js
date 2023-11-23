@@ -5431,14 +5431,14 @@ var showAlert = exports.showAlert = function showAlert(type, message) {
   document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
   window.setTimeout(hideAlert, 3000);
 };
-},{}],"login.js":[function(require,module,exports) {
+},{}],"auth.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.login = login;
-exports.logout = void 0;
+exports.signup = exports.logout = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alerts = require("./alerts");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -5451,13 +5451,13 @@ function login(_x, _x2) {
   return _login.apply(this, arguments);
 }
 function _login() {
-  _login = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(email, password) {
+  _login = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(email, password) {
     var res;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
+          _context3.prev = 0;
+          _context3.next = 3;
           return (0, _axios.default)({
             method: "POST",
             url: "/api/users/login",
@@ -5467,25 +5467,25 @@ function _login() {
             }
           });
         case 3:
-          res = _context2.sent;
+          res = _context3.sent;
           if (res.data.status === "success") {
             (0, _alerts.showAlert)("success", "Successfully Logged In");
             window.setTimeout(function () {
               location.assign("/");
             }, 1000);
           }
-          _context2.next = 11;
+          _context3.next = 11;
           break;
         case 7:
-          _context2.prev = 7;
-          _context2.t0 = _context2["catch"](0);
-          console.log(_context2.t0);
-          (0, _alerts.showAlert)("error", _context2.t0.response.data.message || _context2.t0);
+          _context3.prev = 7;
+          _context3.t0 = _context3["catch"](0);
+          console.log(_context3.t0);
+          (0, _alerts.showAlert)("error", _context3.t0.response.data.message || _context3.t0);
         case 11:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
-    }, _callee2, null, [[0, 7]]);
+    }, _callee3, null, [[0, 7]]);
   }));
   return _login.apply(this, arguments);
 }
@@ -5524,6 +5524,56 @@ var logout = exports.logout = /*#__PURE__*/function () {
   }));
   return function logout() {
     return _ref.apply(this, arguments);
+  };
+}();
+var signup = exports.signup = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(name, email, userName, password, passwordConfirm, about) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          console.log(name, email, userName, password, passwordConfirm, about);
+          _context2.next = 4;
+          return (0, _axios.default)({
+            method: "POST",
+            url: "/api/users/signup",
+            data: {
+              name: name,
+              email: email,
+              userName: userName,
+              password: password,
+              passwordConfirm: passwordConfirm,
+              about: about
+            }
+          });
+        case 4:
+          res = _context2.sent;
+          if (res.data.status == "success") {
+            (0, _alerts.showAlert)("success", "Successfully Created Account!! 🚀");
+            window.setTimeout(function () {
+              location.reload(true);
+              location.assign("/");
+            }, 3000);
+          }
+          _context2.next = 13;
+          break;
+        case 8:
+          _context2.prev = 8;
+          _context2.t0 = _context2["catch"](0);
+          console.log(_context2.t0);
+          (0, _alerts.showAlert)("error", _context2.t0.response.data.message || "Something Went Wrong! Try Again");
+          window.setTimeout(function () {
+            location.reload(true);
+          }, 5000);
+        case 13:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[0, 8]]);
+  }));
+  return function signup(_x3, _x4, _x5, _x6, _x7, _x8) {
+    return _ref2.apply(this, arguments);
   };
 }();
 },{"axios":"../../node_modules/axios/index.js","./alerts":"alerts.js"}],"config.js":[function(require,module,exports) {
@@ -5655,7 +5705,7 @@ var createPost = exports.createPost = /*#__PURE__*/function () {
 },{"./alerts":"alerts.js","axios":"../../node_modules/axios/index.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
-var _login = require("./login");
+var _auth = require("./auth");
 var _updateUserData = require("./updateUserData");
 var _createPost = require("./createPost");
 var _alerts = require("./alerts");
@@ -5667,11 +5717,11 @@ console.log("Starting index.js....");
   e.preventDefault();
   var email = document.getElementById("email").value;
   var password = document.getElementById("password-take").value;
-  (0, _login.login)(email, password);
+  (0, _auth.login)(email, password);
 });
 
 // Logout
-(_document2 = document) === null || _document2 === void 0 || (_document2 = _document2.querySelector(".logout-now")) === null || _document2 === void 0 || _document2.addEventListener("click", _login.logout);
+(_document2 = document) === null || _document2 === void 0 || (_document2 = _document2.querySelector(".logout-now")) === null || _document2 === void 0 || _document2.addEventListener("click", _auth.logout);
 
 // Update User Data
 // console.log(document.querySelector("profile-submit-btn"));
@@ -5700,7 +5750,7 @@ if (document.querySelector(".profile-submit-btn")) {
   var name = document.getElementById("name").value;
   (0, _updateUserData.updateUserData)(name, email, userName, about);
 });
-(_document5 = document) === null || _document5 === void 0 || (_document5 = _document5.querySelector(".create-post-form")) === null || _document5 === void 0 ? void 0 : _document5.addEventListener("submit", function (e) {
+(_document5 = document) === null || _document5 === void 0 || (_document5 = _document5.querySelector(".create-post-form")) === null || _document5 === void 0 || _document5.addEventListener("submit", function (e) {
   e.preventDefault();
   var name = document.getElementById("name").value;
   var category = document.getElementById("category").value;
@@ -5711,9 +5761,22 @@ if (document.querySelector(".profile-submit-btn")) {
   }
   (0, _createPost.createPost)(name, description, category);
 });
-
+document.querySelector(".signup-form-div").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var passwordConfirm = document.getElementById("passwordConfirm").value;
+  var userName = document.getElementById("userName").value;
+  var about = document.getElementById("about").value;
+  if (password !== passwordConfirm) {
+    (0, _alerts.showAlert)("error", "Password Doesnt Macth");
+    return;
+  }
+  (0, _auth.signup)(name, email, userName, password, passwordConfirm, about);
+});
 // document.querySelector(".div-latest-posts").addEventListener("click", (e) => {
 //   latesPosts();
 // });
-},{"./login":"login.js","./updateUserData":"updateUserData.js","./createPost":"createPost.js","./alerts":"alerts.js"}]},{},["index.js"], null)
+},{"./auth":"auth.js","./updateUserData":"updateUserData.js","./createPost":"createPost.js","./alerts":"alerts.js"}]},{},["index.js"], null)
 //# sourceMappingURL=/bundle.js.map

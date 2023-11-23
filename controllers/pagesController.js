@@ -17,29 +17,25 @@ exports.getMainPage = (req, res, next) =>
     next
   );
 
-exports.getPost = (req, res, next) =>
-  handleAsyncFunction(
-    async (req, res, next) => {
-      let post = await PostModel.findById(req.params.id).populate({
-        path: "interactions",
-        select: "comment user",
-      });
+// -------------------- Auth --------------------
 
-      if (!post) return next(new AppError("No Post Found", 404));
-      // res.json({
-      //   post,
-      // });
-
-      res.status(200).render("post", { post, title: "Post" });
-    },
-    req,
-    res,
-    next
-  );
-
+// MiddleWare function , if user already logged in, if user tries to hit login page or signup page it should redirect to Home
+exports.checkLoggedIn = (req, res, next) => {
+  if (res.locals.user) {
+    res.redirect("/");
+    return;
+  }
+  next();
+};
 exports.getLoginForn = (req, res) => {
   res.status(200).render("login", {
     title: "Login into your account",
+  });
+};
+
+exports.getSignupForm = (req, res) => {
+  res.status(200).render("signup", {
+    title: "Create Your Account",
   });
 };
 
@@ -69,6 +65,28 @@ exports.updateUserData = (req, res, next) =>
         title: "Account Details",
         data: updatedUser,
       });
+    },
+    req,
+    res,
+    next
+  );
+
+// -------------------- Posts --------------------
+
+exports.getPost = (req, res, next) =>
+  handleAsyncFunction(
+    async (req, res, next) => {
+      let post = await PostModel.findById(req.params.id).populate({
+        path: "interactions",
+        select: "comment user",
+      });
+
+      if (!post) return next(new AppError("No Post Found", 404));
+      // res.json({
+      //   post,
+      // });
+
+      res.status(200).render("post", { post, title: "Post" });
     },
     req,
     res,

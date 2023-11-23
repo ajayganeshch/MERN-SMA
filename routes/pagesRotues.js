@@ -6,16 +6,19 @@ const router = express.Router();
 
 router.route("/").get(authController.isLoggedIn, pagesController.getMainPage);
 
-router.route("/login").get(
+router
+  .route("/login")
+  .get(
+    authController.isLoggedIn,
+    pagesController.checkLoggedIn,
+    pagesController.getLoginForn
+  );
+
+router.get(
+  "/signup",
   authController.isLoggedIn,
-  (req, res, next) => {
-    if (res.locals.user) {
-      res.redirect("/");
-      return;
-    }
-    next();
-  },
-  pagesController.getLoginForn
+  pagesController.checkLoggedIn,
+  pagesController.getSignupForm
 );
 
 router.route("/post/:id").get(authController.protect, pagesController.getPost);
@@ -23,7 +26,6 @@ router.route("/post/:id").get(authController.protect, pagesController.getPost);
 router.route("/account").get(authController.protect, pagesController.account);
 
 router.route("/latestPosts").get(pagesController.getLatestPosts);
-
 router
   .route("/createPost")
   .get(authController.protect, pagesController.createPost);

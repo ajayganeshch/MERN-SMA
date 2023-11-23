@@ -1,9 +1,10 @@
-import { login } from "./login";
-import { logout } from "./login";
+import { login } from "./auth";
+import { logout } from "./auth";
 import { updateUserData } from "./updateUserData";
 // import { latesPosts } from "./latestPosts";
 import { createPost } from "./createPost";
 import { showAlert } from "./alerts";
+import { signup } from "./auth";
 
 console.log("Starting index.js....");
 
@@ -71,6 +72,23 @@ document
     createPost(name, description, category);
   });
 
+document.querySelector(".signup-form-div").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+  let passwordConfirm = document.getElementById("passwordConfirm").value;
+  let userName = document.getElementById("userName").value;
+  let about = document.getElementById("about").value;
+
+  if (password !== passwordConfirm) {
+    showAlert("error", "Password Doesnt Macth");
+    return;
+  }
+
+  signup(name, email, userName, password, passwordConfirm, about);
+});
 // document.querySelector(".div-latest-posts").addEventListener("click", (e) => {
 //   latesPosts();
 // });
