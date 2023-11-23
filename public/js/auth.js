@@ -20,8 +20,11 @@ export async function login(email, password) {
       }, 1000);
     }
   } catch (err) {
-    console.log(err);
-    showAlert("error", err.response.data.message || err);
+    // console.log(err.response.data.message);
+    showAlert(
+      "error",
+      err?.response?.data?.message || "Something Went Wrong, Try Again"
+    );
   }
 }
 
@@ -40,7 +43,7 @@ export const logout = async () => {
       }, 2000);
     }
   } catch (err) {
-    showAlert("error", "Error logging out Try Again ");
+    showAlert("error", "Error logging out Try Again");
   }
 };
 
@@ -78,7 +81,7 @@ export const signup = async function (
     console.log(err);
     showAlert(
       "error",
-      err.response.data.message || "Something Went Wrong! Try Again"
+      err?.response?.data?.message || "Something Went Wrong! Try Again"
     );
   }
 };

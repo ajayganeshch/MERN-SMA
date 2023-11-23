@@ -6,7 +6,7 @@ import { createPost } from "./createPost";
 import { showAlert } from "./alerts";
 import { signup } from "./auth";
 
-console.log("Starting index.js....");
+// console.log("Starting index.js....");
 
 // Login
 document?.querySelector(".form-li")?.addEventListener("submit", (e) => {

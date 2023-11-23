@@ -23,6 +23,9 @@ export const createPost = async function (name, description, category) {
     console.log(res);
   } catch (err) {
     console.log(err);
-    showAlert("error", err.response.data.message || err);
+    showAlert(
+      "error",
+      err?.response?.data?.message || "Something Went Wrong, Try Again!!"
+    );
   }
 };

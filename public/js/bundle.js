@@ -5428,9 +5428,9 @@ var hideAlert = exports.hideAlert = function hideAlert() {
 var showAlert = exports.showAlert = function showAlert(type, message) {
   hideAlert();
   var markup = "\n  <div class=\"alert-div\">\n    <div class='alert alert--".concat(type, "'>").concat(message, "</div>\n  </div>");
-  document.querySelector(".form-div-first").insertAdjacentHTML("beforeend", markup);
-
-  // window.setTimeout(hideAlert, 3000);
+  console.log(markup);
+  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
+  window.setTimeout(hideAlert, 1000);
 };
 },{}],"auth.js":[function(require,module,exports) {
 "use strict";
@@ -5453,7 +5453,7 @@ function login(_x, _x2) {
 }
 function _login() {
   _login = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(email, password) {
-    var res;
+    var res, _err$response2;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -5475,14 +5475,14 @@ function _login() {
               location.assign("/");
             }, 1000);
           }
-          _context3.next = 11;
+          _context3.next = 10;
           break;
         case 7:
           _context3.prev = 7;
           _context3.t0 = _context3["catch"](0);
-          console.log(_context3.t0);
-          (0, _alerts.showAlert)("error", _context3.t0.response.data.message || _context3.t0);
-        case 11:
+          // console.log(err.response.data.message);
+          (0, _alerts.showAlert)("error", (_context3.t0 === null || _context3.t0 === void 0 || (_err$response2 = _context3.t0.response) === null || _err$response2 === void 0 || (_err$response2 = _err$response2.data) === null || _err$response2 === void 0 ? void 0 : _err$response2.message) || "Something Went Wrong, Try Again");
+        case 10:
         case "end":
           return _context3.stop();
       }
@@ -5516,7 +5516,7 @@ var logout = exports.logout = /*#__PURE__*/function () {
         case 7:
           _context.prev = 7;
           _context.t0 = _context["catch"](0);
-          (0, _alerts.showAlert)("error", "Error logging out Try Again ");
+          (0, _alerts.showAlert)("error", "Error logging out Try Again");
         case 10:
         case "end":
           return _context.stop();
@@ -5529,7 +5529,7 @@ var logout = exports.logout = /*#__PURE__*/function () {
 }();
 var signup = exports.signup = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(name, email, userName, password, passwordConfirm, about) {
-    var res;
+    var res, _err$response;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -5563,7 +5563,7 @@ var signup = exports.signup = /*#__PURE__*/function () {
           _context2.prev = 8;
           _context2.t0 = _context2["catch"](0);
           console.log(_context2.t0);
-          (0, _alerts.showAlert)("error", _context2.t0.response.data.message || "Something Went Wrong! Try Again");
+          (0, _alerts.showAlert)("error", (_context2.t0 === null || _context2.t0 === void 0 || (_err$response = _context2.t0.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.message) || "Something Went Wrong! Try Again");
         case 12:
         case "end":
           return _context2.stop();
@@ -5600,15 +5600,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var updateUserData = exports.updateUserData = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(name, email, userName, about) {
-    var base_url, res;
+    var base_url, res, _err$response;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
           base_url = window.location.origin;
-          console.log(base_url);
-          console.log(name, email, userName, about);
-          _context.next = 6;
+          _context.next = 4;
           return (0, _axios.default)({
             method: "PATCH",
             url: "".concat(base_url, "/api/users/updateMe"),
@@ -5619,7 +5617,7 @@ var updateUserData = exports.updateUserData = /*#__PURE__*/function () {
               about: about
             }
           });
-        case 6:
+        case 4:
           res = _context.sent;
           if (res.data.status == "success") {
             (0, _alerts.showAlert)("success", "Data Updated Successfully");
@@ -5628,18 +5626,17 @@ var updateUserData = exports.updateUserData = /*#__PURE__*/function () {
             });
             document.querySelector(".profile-submit-btn").style.display = "none";
           }
-          _context.next = 14;
+          _context.next = 11;
           break;
-        case 10:
-          _context.prev = 10;
+        case 8:
+          _context.prev = 8;
           _context.t0 = _context["catch"](0);
-          console.log("came err");
-          (0, _alerts.showAlert)("error", _context.t0.response.data.message);
-        case 14:
+          (0, _alerts.showAlert)("error", (_context.t0 === null || _context.t0 === void 0 || (_err$response = _context.t0.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.message) || "Something went wrong, Try Again");
+        case 11:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 10]]);
+    }, _callee, null, [[0, 8]]);
   }));
   return function updateUserData(_x, _x2, _x3, _x4) {
     return _ref.apply(this, arguments);
@@ -5661,7 +5658,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var createPost = exports.createPost = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(name, description, category) {
-    var res;
+    var res, _err$response;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -5691,7 +5688,7 @@ var createPost = exports.createPost = /*#__PURE__*/function () {
           _context.prev = 8;
           _context.t0 = _context["catch"](0);
           console.log(_context.t0);
-          (0, _alerts.showAlert)("error", _context.t0.response.data.message || _context.t0);
+          (0, _alerts.showAlert)("error", (_context.t0 === null || _context.t0 === void 0 || (_err$response = _context.t0.response) === null || _err$response === void 0 || (_err$response = _err$response.data) === null || _err$response === void 0 ? void 0 : _err$response.message) || "Something Went Wrong, Try Again!!");
         case 12:
         case "end":
           return _context.stop();
@@ -5710,8 +5707,7 @@ var _updateUserData = require("./updateUserData");
 var _createPost = require("./createPost");
 var _alerts = require("./alerts");
 var _document, _document2, _document3, _document4, _document$querySelect, _document5, _document6; // import { latesPosts } from "./latestPosts";
-console.log("Starting index.js....");
-
+// console.log("Starting index.js....");
 // Login
 (_document = document) === null || _document === void 0 || (_document = _document.querySelector(".form-li")) === null || _document === void 0 || _document.addEventListener("submit", function (e) {
   e.preventDefault();

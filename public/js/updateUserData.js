@@ -5,8 +5,6 @@ import axios from "axios";
 export const updateUserData = async function (name, email, userName, about) {
   try {
     const base_url = window.location.origin;
-    console.log(base_url);
-    console.log(name, email, userName, about);
     const res = await axios({
       method: "PATCH",
       url: `${base_url}/api/users/updateMe`,
@@ -31,7 +29,9 @@ export const updateUserData = async function (name, email, userName, about) {
       document.querySelector(".profile-submit-btn").style.display = "none";
     }
   } catch (err) {
-    console.log("came err");
-    showAlert("error", err.response.data.message);
+    showAlert(
+      "error",
+      err?.response?.data?.message || "Something went wrong, Try Again"
+    );
   }
 };

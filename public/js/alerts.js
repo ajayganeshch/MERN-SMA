@@ -10,10 +10,8 @@ export const showAlert = (type, message) => {
   <div class="alert-div">
     <div class='alert alert--${type}'>${message}</div>
   </div>`;
+  console.log(markup);
+  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
 
-  document
-    .querySelector(".form-div-first")
-    .insertAdjacentHTML("beforeend", markup);
-
-  // window.setTimeout(hideAlert, 3000);
+  window.setTimeout(hideAlert, 1000);
 };
