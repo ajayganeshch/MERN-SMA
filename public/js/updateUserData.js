@@ -7,7 +7,7 @@ export const updateUserData = async function (name, email, userName, about) {
     console.log(name, email, userName, about);
     const res = await axios({
       method: "PATCH",
-      url: `/updateMe`,
+      url: `/api/users/updateMe`,
       data: {
         name,
         email,
