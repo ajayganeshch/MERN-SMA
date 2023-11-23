@@ -4,10 +4,12 @@ import axios from "axios";
 
 export const updateUserData = async function (name, email, userName, about) {
   try {
+    const base_url = window.location.origin;
+
     console.log(name, email, userName, about);
     const res = await axios({
       method: "PATCH",
-      url: `/api/users/updateMe`,
+      url: `${base_url}/api/users/updateMe`,
       data: {
         name,
         email,
