@@ -5895,11 +5895,12 @@ document.querySelectorAll(".post-btns-button").forEach(function (button) {
       var description = document.querySelector(".description-".concat(num)).value;
       var id = document.querySelector(".get-id-".concat(num)).dataset.postid;
       (0, _postSettings.updatePost)(name, category, description, id);
-    } else if (classNames.includes("post-delete-button")) {
-      num = getFormNumber(classNames, "post-remove-btn");
-      var _id = document.querySelector(".get-id-".concat(num)).dataset.postid;
-      (0, _postSettings.deletePost)(_id);
     }
+    // else if (classNames.includes("post-delete-button")) {
+    //   num = getFormNumber(classNames, "post-remove-btn");
+    //   let id = document.querySelector(`.get-id-${num}`).dataset.postid;
+    //   deletePost(id);
+    // }
   });
 });
 

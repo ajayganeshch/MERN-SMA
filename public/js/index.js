@@ -121,11 +121,12 @@ document.querySelectorAll(".post-btns-button").forEach((button) => {
       let id = document.querySelector(`.get-id-${num}`).dataset.postid;
 
       updatePost(name, category, description, id);
-    } else if (classNames.includes("post-delete-button")) {
-      num = getFormNumber(classNames, "post-remove-btn");
-      let id = document.querySelector(`.get-id-${num}`).dataset.postid;
-      deletePost(id);
     }
+    // else if (classNames.includes("post-delete-button")) {
+    //   num = getFormNumber(classNames, "post-remove-btn");
+    //   let id = document.querySelector(`.get-id-${num}`).dataset.postid;
+    //   deletePost(id);
+    // }
   });
 });
 
