@@ -8,7 +8,10 @@ const axios = require("axios");
 exports.getMainPage = (req, res, next) =>
   handleAsyncFunction(
     async (req, res, next) => {
-      let posts = await PostModel.find();
+      let query = PostModel.find();
+      query = query.sort({ dateUploaded: -1 });
+
+      let posts = await query;
 
       //TODO Filter, Like in feed the currenct user posts should not be there
       res.status(200).render("posts", { title: "AG", posts });
@@ -28,6 +31,7 @@ exports.checkLoggedIn = (req, res, next) => {
   }
   next();
 };
+
 exports.getLoginForn = (req, res) => {
   res.status(200).render("login", {
     title: "Login into your account",
@@ -56,6 +60,7 @@ exports.account = async (req, res) => {
 
   let data = await req.user.populate({
     path: "posts",
+    options: { sort: { dateUploaded: -1 } },
   });
 
   res.status(200).render("account", { data, title: "Account Details" });

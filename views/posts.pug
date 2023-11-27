@@ -22,9 +22,13 @@ block content
           |  
           span= post.description
         .more-about-post
-          span  &#x1F517; More Details About This Post:
-          a(href=`/post/${post.id}` target="_blank") Click Here
-        
+          .div-more-details
+            span &#x1F517; More Details About This Post:
+            a(href=`/post/${post.id}` target="_blank") Click Here
+          .date-div
+            - let date = post.dateUploaded.toLocaleString('en-in',{day:"numeric",month:"numeric",year:"numeric"})
+            p(class='post-date')= `- ${date}`
+
         //TODO
         //- .category-div
         //-   span &#x1F4CA;
