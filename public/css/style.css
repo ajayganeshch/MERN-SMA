@@ -157,7 +157,6 @@ body {
 .description-div,
 .name-div,
 .userCreated-div,
-.more-about-post,
 .comments-div,
 .category-div {
   display: flex;
@@ -211,6 +210,31 @@ body {
 
 .data-posted {
   font-size: large;
+}
+
+.more-about-post {
+  display: flex;
+  flex-direction: row;
+  /* gap: 10px; */
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.div-more-details {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* margin-left: -3px; */
+}
+
+.post-date {
+  padding: 0;
+  margin: 0;
+  font-size: x-large;
+  display: flex;
+  /* flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end; */
 }
 
 .post-page-div {
