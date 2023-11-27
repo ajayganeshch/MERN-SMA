@@ -34,7 +34,7 @@ export const deletePost = async function (id) {
       url: `${base_url}/api/posts/${id}`,
     });
 
-    if (res.status === 204 && res.statusText === "No Content") {
+    if (res.status === 204) {
       showAlert("success", "Deleted Post !!");
       window.setTimeout(() => {
         location.assign("/account");
