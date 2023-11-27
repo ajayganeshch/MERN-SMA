@@ -5,6 +5,7 @@ import { updateUserData } from "./updateUserData";
 import { createPost } from "./createPost";
 import { showAlert } from "./alerts";
 import { signup } from "./auth";
+import { updatePost, deletePost } from "./postSettings";
 
 // console.log("Starting index.js....");
 
@@ -89,6 +90,45 @@ document?.querySelector(".signup-form-div")?.addEventListener("submit", (e) => {
 
   signup(name, email, userName, password, passwordConfirm, about);
 });
+
+function getFormNumber(classNames, nameRecived) {
+  let formNumber;
+  classNames.forEach((curr) => {
+    if (curr.startsWith(nameRecived)) {
+      formNumber = curr.split("-").at(-1);
+      // console.log(formNumber);
+    }
+  });
+
+  return formNumber;
+}
+
+document.querySelectorAll(".post-btns-button").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    let classNames = [...e.target.classList];
+
+    if (!classNames.includes("post-settings-btn")) {
+      return;
+    }
+    let num;
+
+    if (classNames.includes("post-edit-btn")) {
+      num = getFormNumber(classNames, "post-update-btn");
+
+      let name = document.querySelector(`.title-${num}`).value;
+      let category = document.querySelector(`.category-${num}`).value;
+      let description = document.querySelector(`.description-${num}`).value;
+      let id = document.querySelector(`.get-id-${num}`).dataset.postid;
+
+      updatePost(name, category, description, id);
+    } else if (classNames.includes("post-delete-button")) {
+      num = getFormNumber(classNames, "post-remove-btn");
+      let id = document.querySelector(`.get-id-${num}`).dataset.postid;
+      deletePost(id);
+    }
+  });
+});
+
 // document.querySelector(".div-latest-posts").addEventListener("click", (e) => {
 //   latesPosts();
 // });

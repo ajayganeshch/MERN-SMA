@@ -144,7 +144,8 @@ body {
   flex-direction: column;
 }
 
-.posts-div .post-div {
+.posts-div .post-div,
+.posts-div-account-page .post-div {
   margin-bottom: 40px;
 }
 
@@ -373,6 +374,7 @@ body {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 9999;
 }
 
 .alert {
@@ -476,7 +478,7 @@ body {
 }
 
 .profile-form-input {
-  background-color: #f2e3e3;
+  background-color: rgb(210, 220, 229);
   border: none;
   height: 50px;
   border-radius: 5px;
@@ -564,4 +566,88 @@ body {
   font-weight: 500;
   border: none;
   background-color: rgb(255, 234, 0);
+}
+
+.posts-div-account-page {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.account-post-settings {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-post-edit-label {
+  background-color: rgb(210, 220, 229);
+  border: none;
+  height: 40px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.account-post-div {
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.post-btns-button {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 0;
+  gap: 20px;
+  margin-right: 20px;
+  top: 0;
+  margin-top: 8px;
+}
+
+.post-settings-btn {
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.posts-heading {
+  color: white;
+}
+
+.posts-heading {
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.no-posts {
+  color: white;
+  font-size: xx-large;
+  /* text-decoration: underline dashed; */
+}
+
+.post-delete-btn,
+.post-edit-btn {
+  background-color: greenyellow;
+  /* border: 1px solid black; */
+  padding: 5px;
+  font-size: large;
+  /* margin-right: 10px; */
+  color: black;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.post-delete-btn {
+  background-color: tomato;
+  color: black;
+}
+
+.post-delete-btn:hover {
+  background-color: white;
+  color: red;
+}
+
+.post-edit-btn:hover {
+  background-color: rgb(237, 225, 100);
 }

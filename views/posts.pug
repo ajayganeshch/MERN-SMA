@@ -4,10 +4,6 @@ block content
   .posts-div.container
     each post in posts
       .post-div
-        //- .control-div
-        //-   //- span &#x270D; Create Post
-        //-   span &#x1F589;
-        //-   span &#x1F5D1;
         .userCreated-div
           //- img(src=`${post.userCreated.profilePic}`)
           .img-user-pic
@@ -28,6 +24,7 @@ block content
         .more-about-post
           span  &#x1F517; More Details About This Post:
           a(href=`/post/${post.id}` target="_blank") Click Here
+        
         //TODO
         //- .category-div
         //-   span &#x1F4CA;

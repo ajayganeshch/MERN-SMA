@@ -3,6 +3,7 @@ const UserModel = require("../models/userModel");
 const AppError = require("../utils/appError");
 const PostModel = require("./../models/postsModel");
 const apiFeatures = require("./../utils/apiFeatures");
+const axios = require("axios");
 
 exports.getMainPage = (req, res, next) =>
   handleAsyncFunction(
@@ -39,10 +40,25 @@ exports.getSignupForm = (req, res) => {
   });
 };
 
-exports.account = (req, res) => {
-  res
-    .status(200)
-    .render("account", { data: req.user, title: "Account Details" });
+exports.account = async (req, res) => {
+  // const base_url = req.protocol + "://" + req.get("host");
+  // // console.log(base_url);
+  // try {
+  //   let resRecived = await axios({
+  //     method: "GET",
+  //     url: `${base_url}/api/users/me`,
+  //     withCredentials: true,
+  //   });
+  //   console.log(resRecived);
+  // } catch (err) {
+  //   // console.log(err.response.data);
+  // }
+
+  let data = await req.user.populate({
+    path: "posts",
+  });
+
+  res.status(200).render("account", { data, title: "Account Details" });
 };
 
 exports.updateUserData = (req, res, next) =>

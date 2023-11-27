@@ -9,11 +9,12 @@ exports.checkLoggedUser = async (req, res, next) => {
 
   let postToBeUpdated = await PostsModel.findById(req.params.id);
 
-  let postOwner = postToBeUpdated.id;
+  let postOwner = postToBeUpdated.userCreated.id.toString();
 
-  let loggedUser = JSON.stringify(req.user._id);
+  let loggedUser = req.user._id.toString();
 
-  if (postOwner != loggedUser) {
+  // console.log(1 == 1);
+  if (postOwner !== loggedUser) {
     return next(new AppError("You Dont Have access to update this post"));
   }
   next();
